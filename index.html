@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Lernseite Eidersperrwerk</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f4f7fb; }
+    header { background:#005c7a; color:white; padding:1rem 2rem; }
+    main { padding:1rem 2rem 3rem; max-width:1000px; margin:auto; }
+    h1, h2, h3 { color:#004055; }
+    .intro { margin-bottom:1rem; }
+    .btn { display:inline-block; padding:0.6rem 1.2rem; background:#007fa3; color:white;
+           border-radius:4px; cursor:pointer; text-decoration:none; }
+    .btn:disabled { background:#888; cursor:not-allowed; }
+    .modul { background:white; border-radius:6px; padding:1rem 1.5rem; margin:1rem 0; border:1px solid #dde4ee; }
+    .hidden { display:none; }
+    .merk { font-weight:bold; color:#007fa3; margin:0.4rem 0; }
+    .quiz-section { margin-top:1rem; border-top:1px dashed #ccd; padding-top:0.8rem; }
+    .rf-item { margin:0.3rem 0; }
+    .rf-item button { margin-left:0.4rem; }
+    .zuordnung-grid { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem; }
+    .dropzone, .draggable { padding:0.4rem 0.6rem; border-radius:4px; border:1px solid #bcc7d6; background:#eef2f8; min-width:130px; }
+    .dropzone { background:#ffffff; min-height:2.4rem; }
+    .drop-label { font-size:0.85rem; color:#555; }
+    .feedback { margin-top:0.5rem; font-weight:bold; }
+    .correct { color:green; }
+    .wrong { color:#c00; }
+    .mc-question { margin:0.7rem 0; padding:0.5rem; background:#ffffff; border-radius:4px; border:1px solid #dde4ee; }
+    .mc-question p { margin:0 0 0.3rem 0; }
+    .mc-option { display:block; margin:0.15rem 0; }
+
+    /* Markierung für richtige/falsche Fragen im Test */
+    .mc-correct-question  { border-color:#2e7d32; background:#e8f5e9; }
+    .mc-wrong-question    { border-color:#c62828; background:#ffebee; }
+
+    footer { background:#eee; padding:1rem 2rem; font-size:0.9rem; color:#555; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Eidersperrwerk – Technik, Natur & Küstenschutz</h1>
+  <p>Lerne die 15 wichtigsten Fakten in 10–15 Minuten und teste dein Wissen.</p>
+</header>
+
+<main>
+  <!-- Startbereich -->
+  <section id="start">
+    <p class="intro">
+      Das Eidersperrwerk an der Mündung der Eider in die Nordsee schützt seit den 1970er-Jahren weite Teile der Westküste Schleswig-Holsteins vor Sturmfluten und sorgt für die Entwässerung der Marschgebiete.
+    </p>
+    <button class="btn" onclick="startLearning()">Los geht’s</button>
+  </section>
+
+  <!-- Modul 1 -->
+  <section id="modul1" class="modul hidden">
+    <h2>Modul 1 – Lage, Anlass, Aufgabe</h2>
+    <p>
+      Das Eidersperrwerk liegt bei Wesselburenerkoog an der Mündung der Eider in die Nordsee, etwa 15 km unterhalb von Tönning.
+      Es wurde von 1967 bis 1973 gebaut, unter anderem als Reaktion auf schwere Sturmfluten der 1960er-Jahre.
+      Hauptaufgabe ist der Küstenschutz und die sichere Entwässerung der Marschflächen hinter dem Bauwerk.
+    </p>
+    <p class="merk">Merke: Lage an der Eidermündung, Bau 1967–1973, Hauptaufgabe Küstenschutz & Entwässerung.</p>
+
+    <div class="quiz-section">
+      <h3>Richtig/Falsch-Schnellcheck</h3>
+      <div class="rf-item">
+        Das Eidersperrwerk liegt an der Elbmündung.
+        <button onclick="rfCheck(this,false)">Richtig</button>
+        <button onclick="rfCheck(this,true)">Falsch</button>
+      </div>
+      <div class="rf-item">
+        Der Bau begann in den späten 1960er-Jahren.
+        <button onclick="rfCheck(this,true)">Richtig</button>
+        <button onclick="rfCheck(this,false)">Falsch</button>
+      </div>
+      <div class="rf-item">
+        Eine zentrale Aufgabe ist der Schutz vor Sturmfluten.
+        <button onclick="rfCheck(this,true)">Richtig</button>
+        <button onclick="rfCheck(this,false)">Falsch</button>
+      </div>
+      <div id="modul1-feedback" class="feedback"></div>
+    </div>
+
+    <button class="btn" onclick="nextModul(1)">Weiter zu Modul 2</button>
+  </section>
+
+  <!-- Modul 2 -->
+  <section id="modul2" class="modul hidden">
+    <h2>Modul 2 – Dimensionen & Wasser</h2>
+    <p>
+      Das Bauwerk ist insgesamt rund 1,5 Kilometer lang, das eigentliche Sielbauwerk einige Hundert Meter.
+      Es besitzt fünf Sielöffnungen mit jeweils etwa 40 Metern Breite und gewaltigen Hubtoren.
+      Pro Tide strömen etwa 30 bis 40 Millionen Kubikmeter Wasser durch das Sperrwerk.
+    </p>
+    <p class="merk">Merke: 5 Sielöffnungen à ca. 40 m, riesige Wassermengen pro Tide.</p>
+
+    <div class="quiz-section">
+      <h3>Zuordnung: Zahl & Bedeutung</h3>
+      <p>Ziehe jede Zahl auf die passende Aussage.</p>
+      <div class="zuordnung-grid">
+        <div class="draggable" draggable="true" data-key="siel">5 Sielöffnungen</div>
+        <div class="draggable" draggable="true" data-key="breite">40 m Breite</div>
+        <div class="draggable" draggable="true" data-key="wassermenge">30–40 Mio. m³</div>
+      </div>
+      <div class="zuordnung-grid">
+        <div class="dropzone" data-accept="siel">
+          <div class="drop-label">Anzahl der Öffnungen des Sielbauwerks</div>
+        </div>
+        <div class="dropzone" data-accept="breite">
+          <div class="drop-label">Breite einer einzelnen Sielöffnung</div>
+        </div>
+        <div class="dropzone" data-accept="wassermenge">
+          <div class="drop-label">Wassermenge, die pro Tide durchströmt</div>
+        </div>
+      </div>
+      <button class="btn" style="margin-top:0.5rem" onclick="checkZuordnung()">Zuordnung prüfen</button>
+      <div id="zuordnung-feedback" class="feedback"></div>
+    </div>
+
+    <button class="btn" onclick="nextModul(2)">Weiter zu Modul 3</button>
+  </section>
+
+  <!-- Modul 3 -->
+  <section id="modul3" class="modul hidden">
+    <h2>Modul 3 – Schleuse, Tunnel, Entwässerung</h2>
+    <p>
+      Eine Schleuse mit rund 75 Metern Länge und 13 Metern Breite sorgt dafür, dass die Schifffahrt zwischen Eider und Nordsee erhalten bleibt.
+      Ein etwa 236 Meter langer Tunnel mit Straße verbindet Dithmarschen und die Halbinsel Eiderstedt, obenauf verläuft ein Fußweg mit Aussicht.
+      Über die Sieltore wird das Binnenland entwässert, sodass die Marschflächen auch bei erhöhtem Außenniveau trocken bleiben.
+    </p>
+    <p class="merk">Merke: Schleuse für Schiffe, Tunnel als Verkehrsverbindung, Siel für Entwässerung.</p>
+
+    <h3>Schematische Draufsicht</h3>
+    <svg width="100%" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="background:#e6f4ff; border-radius:4px; margin-bottom:1rem;">
+      <!-- Beschriftungen oben/unten -->
+      <text x="60" y="20" font-size="14" fill="#004055">Nordsee</text>
+      <text x="60" y="210" font-size="14" fill="#004055">Eider / Binnenland</text>
+
+      <!-- Nordsee-Bereich -->
+      <rect x="0" y="0" width="600" height="80" fill="#b3d7ff" />
+
+      <!-- Eider-Bereich -->
+      <rect x="0" y="140" width="600" height="80" fill="#cde7ff" />
+
+      <!-- Sperrwerksdamm -->
+      <rect x="0" y="80" width="600" height="60" fill="#dddddd" />
+      <text x="240" y="115" font-size="14" fill="#333">Sperrwerksdamm</text>
+
+      <!-- 5 Sielöffnungen -->
+      <g fill="#88b0ff">
+        <rect x="80"  y="80" width="30" height="60" />
+        <rect x="150" y="80" width="30" height="60" />
+        <rect x="220" y="80" width="30" height="60" />
+        <rect x="290" y="80" width="30" height="60" />
+        <rect x="360" y="80" width="30" height="60" />
+      </g>
+      <text x="120" y="75" font-size="12" fill="#333">5 Sielöffnungen</text>
+
+      <!-- Schleuse -->
+      <rect x="460" y="70" width="40" height="80" fill="#aac8ff" stroke="#005c7a" />
+      <text x="450" y="65" font-size="12" fill="#333">Schleuse</text>
+
+      <!-- Straßentunnel im Wehrträger (schematisch) -->
+      <rect x="70" y="100" width="340" height="20" fill="#999999" />
+      <text x="120" y="135" font-size="12" fill="#333">Straße / Tunnel Dithmarschen – Eiderstedt</text>
+
+      <!-- Pfeile für Tidefluss -->
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L10,3 L0,6 z" fill="#004055" />
+      </marker>
+      <line x1="40" y1="60" x2="40" y2="150" stroke="#004055" stroke-width="2" marker-end="url(#arrow)" />
+      <text x="50" y="105" font-size="11" fill="#004055">Tidefluss</text>
+    </svg>
+
+    <div class="quiz-section">
+      <h3>Mini-Quiz (Single-Choice im Kopf)</h3>
+      <p>Welche Funktion hat die Schleuse?</p>
+      <ul>
+        <li>A: Nur Dekoration</li>
+        <li>B: Schiffsverkehr zwischen Eider und Nordsee</li>
+        <li>C: Stromerzeugung</li>
+      </ul>
+      <p><em>Richtige Antwort: B.</em></p>
+    </div>
+
+    <button class="btn" onclick="nextModul(3)">Weiter zu Modul 4</button>
+  </section>
+
+  <!-- Modul 4 -->
+  <section id="modul4" class="modul hidden">
+    <h2>Modul 4 – Natur & Sicherheit</h2>
+    <p>
+      Das Sperrwerk liegt am Rand des Nationalparks Schleswig-Holsteinisches Wattenmeer und nahe dem Katinger Watt, einem bedeutenden Vogel- und Feuchtgebiet.
+      Durch Regulierung des Salzwassers schützt es landwirtschaftliche Flächen und hilft, Böden und Lebensräume zu erhalten.
+      Mehrere Tor- und Schutzelemente sorgen für hohe Betriebssicherheit auch bei extremen Sturmfluten.
+    </p>
+    <p class="merk">Merke: Technikbauwerk im Nationalpark – Schutz von Menschen, Landwirtschaft und Natur.</p>
+
+    <div class="quiz-section">
+      <h3>Richtig/Falsch Natur & Sicherheit</h3>
+      <div class="rf-item">
+        Das Umland ist wichtig für Zugvögel.
+        <button onclick="rfCheck(this,true)">Richtig</button>
+        <button onclick="rfCheck(this,false)">Falsch</button>
+      </div>
+      <div class="rf-item">
+        Es gibt nur ein einziges Tor ohne Reserve.
+        <button onclick="rfCheck(this,false)">Richtig</button>
+        <button onclick="rfCheck(this,true)">Falsch</button>
+      </div>
+      <div id="modul4-feedback" class="feedback"></div>
+    </div>
+
+    <button class="btn" onclick="nextModul(4)">Weiter zu Modul 5</button>
+  </section>
+
+  <!-- Modul 5 -->
+  <section id="modul5" class="modul hidden">
+    <h2>Modul 5 – Tourismus & nachhaltiger Besuch</h2>
+    <p>
+      Das Eidersperrwerk ist ein beliebtes Ausflugsziel zum Schiffegucken, Spazierengehen und als Startpunkt für Naturtouren im Wattenmeer.
+      Führungen und Exkursionen erklären das Zusammenspiel von Technik, Küstenschutz und Naturschutz.
+      Nachhaltig unterwegs bist du mit Fahrrad oder öffentlichen Verkehrsmitteln, bleibst auf markierten Wegen und vermeidest Störungen von Vögeln und Seehunden.
+    </p>
+    <p class="merk">Merke: Besuch ja – aber naturverträglich und rücksichtsvoll.</p>
+
+    <div class="quiz-section">
+      <h3>Dein nachhaltiger Besuch (Selbstreflexion)</h3>
+      <ul>
+        <li>Wie könntest du anreisen (z.B. Bahn + Bus + Fahrrad)?</li>
+        <li>Was tust du mit deinem Müll?</li>
+        <li>Wie verhältst du dich bei brütenden Vögeln in Ufernähe?</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="showTest()">Zum Abschlusstest</button>
+  </section>
+
+  <!-- Multiple-Choice-Test -->
+  <section id="test" class="modul hidden">
+    <h2>Abschlusstest – Weißt du noch …?</h2>
+    <form id="mc-form">
+      <div class="mc-question" data-correct="A">
+        <p>1. Wo liegt das Eidersperrwerk?</p>
+        <label class="mc-option"><input type="radio" name="q1" value="A"> A: An der Mündung der Eider in die Nordsee</label>
+        <label class="mc-option"><input type="radio" name="q1" value="B"> B: An der Elbmündung bei Cuxhaven</label>
+        <label class="mc-option"><input type="radio" name="q1" value="C"> C: Im Hamburger Hafen</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>2. Was ist die Hauptaufgabe des Eidersperrwerks?</p>
+        <label class="mc-option"><input type="radio" name="q2" value="A"> A: Stromerzeugung</label>
+        <label class="mc-option"><input type="radio" name="q2" value="B"> B: Küstenschutz und Entwässerung</label>
+        <label class="mc-option"><input type="radio" name="q2" value="C"> C: Nur Schifffahrt</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>3. In welchem Zeitraum wurde das Eidersperrwerk gebaut?</p>
+        <label class="mc-option"><input type="radio" name="q3" value="A"> A: 1950–1955</label>
+        <label class="mc-option"><input type="radio" name="q3" value="B"> B: 1967–1973</label>
+        <label class="mc-option"><input type="radio" name="q3" value="C"> C: 1985–1990</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>4. Wie viele Sielöffnungen hat das Sperrwerk?</p>
+        <label class="mc-option"><input type="radio" name="q4" value="A"> A: Drei</label>
+        <label class="mc-option"><input type="radio" name="q4" value="B"> B: Fünf</label>
+        <label class="mc-option"><input type="radio" name="q4" value="C"> C: Zehn</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>5. Welche Wassermenge strömt pro Tide ungefähr durch das Sperrwerk?</p>
+        <label class="mc-option"><input type="radio" name="q5" value="A"> A: 3–4 Mio. m³</label>
+        <label class="mc-option"><input type="radio" name="q5" value="B"> B: 30–40 Mio. m³</label>
+        <label class="mc-option"><input type="radio" name="q5" value="C"> C: 300–400 Mio. m³</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>6. Wozu dient die Schleuse am Eidersperrwerk?</p>
+        <label class="mc-option"><input type="radio" name="q6" value="A"> A: Zur Stromerzeugung</label>
+        <label class="mc-option"><input type="radio" name="q6" value="B"> B: Für den Schiffsverkehr zwischen Eider und Nordsee</label>
+        <label class="mc-option"><input type="radio" name="q6" value="C"> C: Nur für Sportboote im Binnenland</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>7. Welche Gebiete verbindet der Tunnel im Inneren?</p>
+        <label class="mc-option"><input type="radio" name="q7" value="A"> A: Hamburg und Sylt</label>
+        <label class="mc-option"><input type="radio" name="q7" value="B"> B: Dithmarschen und die Halbinsel Eiderstedt</label>
+        <label class="mc-option"><input type="radio" name="q7" value="C"> C: Kiel und Lübeck</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>8. In welchem Schutzgebiet liegt das Eidersperrwerk?</p>
+        <label class="mc-option"><input type="radio" name="q8" value="A"> A: Nationalpark Harz</label>
+        <label class="mc-option"><input type="radio" name="q8" value="B"> B: Nationalpark Schleswig-Holsteinisches Wattenmeer</label>
+        <label class="mc-option"><input type="radio" name="q8" value="C"> C: Biosphärenreservat Rhön</label>
+      </div>
+
+      <div class="mc-question" data-correct="C">
+        <p>9. Was ist ein nachhaltiges Besucherverhalten?</p>
+        <label class="mc-option"><input type="radio" name="q9" value="A"> A: Wege verlassen, um bessere Fotos zu machen</label>
+        <label class="mc-option"><input type="radio" name="q9" value="B"> B: Vögel aufscheuchen, damit sie auffliegen</label>
+        <label class="mc-option"><input type="radio" name="q9" value="C"> C: Auf markierten Wegen bleiben und Müll vermeiden</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>10. Warum gilt das Eidersperrwerk als bedeutendes „Jahrhundertbauwerk“?</p>
+        <label class="mc-option"><input type="radio" name="q10" value="A"> A: Weil dort ein Flughafen gebaut wurde</label>
+        <label class="mc-option"><input type="radio" name="q10" value="B"> B: Weil es als großes Küstenschutzbauwerk viel Siedlungsraum vor Sturmfluten schützt</label>
+        <label class="mc-option"><input type="radio" name="q10" value="C"> C: Weil es das erste Sperrwerk der Welt war</label>
+      </div>
+
+      <div class="mc-question" data-correct="C">
+        <p>11. Welche Aussage zu den Toren des Sperrwerks stimmt?</p>
+        <label class="mc-option"><input type="radio" name="q11" value="A"> A: Es gibt nur eine einzige Torreihe ohne Reserve.</label>
+        <label class="mc-option"><input type="radio" name="q11" value="B"> B: Die Tore bleiben bei Sturmfluten grundsätzlich offen.</label>
+        <label class="mc-option"><input type="radio" name="q11" value="C"> C: Mehrere Torpaare sorgen für zusätzliche Sicherheit bei Sturmflutbetrieb.</label>
+      </div>
+
+      <div class="mc-question" data-correct="A">
+        <p>12. Wofür wird der Straßentunnel in den Wehrträgern genutzt?</p>
+        <label class="mc-option"><input type="radio" name="q12" value="A"> A: Als Verkehrsverbindung zwischen Dithmarschen und der Halbinsel Eiderstedt.</label>
+        <label class="mc-option"><input type="radio" name="q12" value="B"> B: Als unterirdischer Schifffahrtskanal.</label>
+        <label class="mc-option"><input type="radio" name="q12" value="C"> C: Nur als Lagerraum für Maschinen.</label>
+      </div>
+
+      <div class="mc-question" data-correct="B">
+        <p>13. Was ist beim Besuch im Nationalpark Wattenmeer besonders wichtig?</p>
+        <label class="mc-option"><input type="radio" name="q13" value="A"> A: Möglichst nah an brütende Vögel herangehen.</label>
+        <label class="mc-option"><input type="radio" name="q13" value="B"> B: Auf markierten Wegen bleiben und Störungen von Tieren vermeiden.</label>
+        <label class="mc-option"><input type="radio" name="q13" value="C"> C: Muscheln und Pflanzen als Souvenir mitnehmen.</label>
+      </div>
+
+      <div class="mc-question" data-correct="C">
+        <p>14. Welche Kombination beschreibt das Eidersperrwerk am besten?</p>
+        <label class="mc-option"><input type="radio" name="q14" value="A"> A: Reines Industriegebiet ohne Naturbedeutung.</label>
+        <label class="mc-option"><input type="radio" name="q14" value="B"> B: Nur Naturschutzgebiet ohne technische Bauwerke.</label>
+        <label class="mc-option"><input type="radio" name="q14" value="C"> C: Großes Küstenschutzbauwerk im Umfeld eines Nationalparks.</label>
+      </div>
+
+      <div class="mc-question" data-correct="A">
+        <p>15. Warum ist regelmäßige Instandhaltung des Sperrwerks nötig?</p>
+        <label class="mc-option"><input type="radio" name="q15" value="A"> A: Weil Salzwasser und Wellen dauerhaft an Beton und Stahl angreifen.</label>
+        <label class="mc-option"><input type="radio" name="q15" value="B"> B: Nur aus optischen Gründen für den Tourismus.</label>
+        <label class="mc-option"><input type="radio" name="q15" value="C"> C: Weil die Tore sonst dauerhaft offen bleiben.</label>
+      </div>
+
+      <button type="button" class="btn" onclick="auswerten()">Test auswerten</button>
+    </form>
+    <div id="test-ergebnis" class="feedback"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Hinweis: Diese Lernseite fasst zentrale Fakten zum Eidersperrwerk zusammen und betont einen naturverträglichen, nachhaltigen Besuch.</p>
+</footer>
+
+<script>
+  function startLearning() {
+    document.getElementById('start').classList.add('hidden');
+    document.getElementById('modul1').classList.remove('hidden');
+  }
+
+  function nextModul(nr) {
+    var current = document.getElementById('modul' + nr);
+    var next = document.getElementById('modul' + (nr + 1));
+    if (next) {
+      current.classList.add('hidden');
+      next.classList.remove('hidden');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  }
+
+  function showTest() {
+    document.getElementById('modul5').classList.add('hidden');
+    document.getElementById('test').classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function rfCheck(btn, isCorrect) {
+    var parent = btn.parentElement;
+    var container = parent.parentElement;
+    var fbId = '';
+    if (container.id === 'modul1') fbId = 'modul1-feedback';
+    if (container.id === 'modul4') fbId = 'modul4-feedback';
+    var fb = fbId ? document.getElementById(fbId) : null;
+
+    if (isCorrect) {
+      if (fb) { fb.textContent = 'Richtig!'; fb.className = 'feedback correct'; }
+    } else {
+      if (fb) { fb.textContent = 'Nicht ganz. Schau dir den Infotext noch einmal an.'; fb.className = 'feedback wrong'; }
+    }
+  }
+
+  // Drag & Drop für Zuordnung
+  let dragged = null;
+  document.addEventListener('dragstart', function (e) {
+    if (e.target.classList.contains('draggable')) {
+      dragged = e.target;
+      e.dataTransfer.setData('text/plain', e.target.dataset.key);
+    }
+  });
+  document.addEventListener('dragover', function (e) {
+    if (e.target.classList.contains('dropzone')) {
+      e.preventDefault();
+    }
+  });
+  document.addEventListener('drop', function (e) {
+    if (e.target.classList.contains('dropzone')) {
+      e.preventDefault();
+      if (dragged) {
+        e.target.innerHTML = '';
+        e.target.appendChild(dragged);
+        dragged = null;
+      }
+    }
+  });
+
+  function checkZuordnung() {
+    const zones = document.querySelectorAll('.dropzone');
+    let correct = 0;
+    zones.forEach(z => {
+      const key = z.dataset.accept;
+      if (z.firstElementChild && z.firstElementChild.dataset && z.firstElementChild.dataset.key === key) {
+        correct++;
+      }
+    });
+    const fb = document.getElementById('zuordnung-feedback');
+    if (correct === zones.length) {
+      fb.textContent = 'Alle Zuordnungen korrekt – sehr gut!';
+      fb.className = 'feedback correct';
+    } else {
+      fb.textContent = 'Einige Zuordnungen sind noch falsch. Probiere es noch einmal.';
+      fb.className = 'feedback wrong';
+    }
+  }
+
+  function auswerten() {
+    const questions = document.querySelectorAll('#mc-form .mc-question');
+    let richtig = 0;
+    let beantwortet = 0;
+
+    questions.forEach((q, index) => {
+      // alte Markierungen entfernen
+      q.classList.remove('mc-correct-question', 'mc-wrong-question');
+
+      const name = 'q' + (index + 1);
+      const correct = q.dataset.correct;
+      const checked = document.querySelector('input[name="' + name + '"]:checked');
+
+      if (checked) {
+        beantwortet++;
+        if (checked.value === correct) {
+          richtig++;
+          q.classList.add('mc-correct-question');   // Frage grün markieren
+        } else {
+          q.classList.add('mc-wrong-question');     // Frage rot/pink markieren
+        }
+      }
+    });
+
+    const gesamt = questions.length;
+    const ergebnis = document.getElementById('test-ergebnis');
+    ergebnis.className = 'feedback';
+
+    if (beantwortet < gesamt) {
+      ergebnis.textContent = 'Bitte beantworte alle Fragen, bevor du den Test auswertest.';
+      ergebnis.classList.add('wrong');
+      return;
+    }
+
+    const prozent = Math.round((richtig / gesamt) * 100);
+    ergebnis.textContent = 'Du hast ' + richtig + ' von ' + gesamt + ' Fragen richtig beantwortet (' + prozent + ' %).';
+    ergebnis.classList.add(prozent >= 70 ? 'correct' : 'wrong');
+  }
+</script>
+</body>
+  </html>
